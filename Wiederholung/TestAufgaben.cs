@@ -132,5 +132,20 @@ namespace Wiederholung
 
         }
 
+        public static void IncrementTest()
+        {
+            // ++i wert vor der benutzung raufzählen und neuen wert nehmen
+            // i++ wert nach der benutzung raufzählen und alten wert nehmen
+
+            int a = 5; //6
+            int b = 3; //4
+
+            int ergebnis = ++b + ++a / b + a;
+            // ergebnis 11 =  4 + (6 / 4) + 6
+            // variablen werden der reihenfolge nach ausgerechnet und in die formel eingefügt
+            // die formel wird dann nach mathematischer priorität abgearbeitet (klammern vor punkt vor strich)
+
+            Console.WriteLine(ergebnis);
+        }
     }
 }
