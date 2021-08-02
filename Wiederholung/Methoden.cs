@@ -51,9 +51,5 @@ namespace Wiederholung
                 RecursiveMethod(); // selbstaufruf. Für den PC ist es ein ganz normaler aufruf einer Funktion
             }
         }
-
-
-        //1800   9
-        //25     7
     }
 }

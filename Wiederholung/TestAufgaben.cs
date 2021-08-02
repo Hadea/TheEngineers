@@ -42,5 +42,95 @@ namespace Wiederholung
             for (int counter = 3; counter < 22; counter += 3)
                 Console.WriteLine("Zahl " + counter + " ist " + (counter % 2 == 0 ? "gerade" : "ungerade"));
         }
+
+
+        //Aufgabe: Fibonacci
+        // parameter   1 2 3 4 5 6  7  8  9 10 .. 
+        // return      1 1 2 3 5 8 13 21 34 55 ..
+
+        // Methode schreiben welche eine Zahl entgegennimmt und die fibonacci-zahl
+        // dazu ausrechnet und zurückgibt
+
+
+        // rekursiv:
+        // fibonacci anfrage kleiner als 3 ist immer 1
+        // fibonacci der zahl 5 ist die summe aus fibonacci 5-1 und fibonacci 5-2
+
+        public static uint FibonacciRecursive(uint Number)
+        {
+            if (Number == 1 || Number == 2)
+                return 1;
+            return FibonacciRecursive(Number - 1) + FibonacciRecursive(Number - 2);
+        }
+
+        public static uint FibonacciLoop(uint Number)
+        {
+            if (Number == 0)
+            {
+                return 0;
+            }
+
+            if (Number == 1 || Number == 2)
+            {
+                return 1;
+            }
+
+            uint Alpha = 1;
+            uint Bravo = 1;
+            uint Summe = 0;
+
+            for (int counter = 2; counter < Number; counter++)
+            {
+                Summe = Alpha + Bravo;
+                Alpha = Bravo;
+                Bravo = Summe;
+            }
+
+            return Summe;
+        }
+
+        public static void BenchmarkFibonacci()
+        {
+
+            uint[,] NumbersAndResults = new uint[3, 20]; // ein Array mit 3 zeilen und 20 spalten
+
+            // erstellen eines Objektes vom Typ Random, welches wir zum erstellen von zufälligen Zahlen nutzen
+            Random rndGen = new Random();
+
+            for (int counter = 0; counter < 20; counter++)
+            {
+                //geht die oberste spalte des Array durch und füllt jedes fach mit einer zufälligen zahl
+                NumbersAndResults[0,counter] = (uint)rndGen.Next(1, 48); // kleinster möglicher wert 1, grösster 47
+            }
+
+            DateTime startRecursive = DateTime.Now; // systemzeit speichern kurz vor dem rekursiven durchlauf
+
+            // fibonacci durchlauf mit rekursion
+
+            for (uint counter = 0; counter < 20; counter++) 
+            {
+                // liesst den wert aus reihe 0 und spalte "counter", lässt ihn mit Fibonacci umrechnen und
+                // speichert das Ergebnis in reihe 1 und spalte "counter"
+                NumbersAndResults[1, counter] = FibonacciRecursive(NumbersAndResults[0, counter]);
+            }
+
+            DateTime endRecursiveStartLoop = DateTime.Now; // systemzeit speichern kurz nach dem rekursiven durchlauf und direkt vor dem loop
+
+            for (uint counter = 0; counter < 20; counter++)
+            {
+                NumbersAndResults[2, counter] = FibonacciLoop(NumbersAndResults[0, counter]);
+            }
+
+            DateTime endLoop = DateTime.Now; // systemzeit nachdem der loop fertig ist
+
+
+            Console.WriteLine("Statistik zu den Fibonacci-Varianten");
+            Console.WriteLine("Es mussten " + NumbersAndResults.Length + " elemente berechnet werden");
+            Console.WriteLine("Benötigte Zeit Rekursiv : " + (endRecursiveStartLoop - startRecursive).TotalSeconds);
+            Console.WriteLine("Benötigte Zeit Loop     : " + (endLoop - endRecursiveStartLoop).TotalSeconds);
+
+
+        }
+
     }
 }
