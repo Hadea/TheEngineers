@@ -37,6 +37,48 @@ namespace Wiederholung
 
         }
 
+        // 9 8 7 1 8 9 2 4 8 9 4 7 8 9 4 2 9 4 7 4 5 2 9 4 8 4 5 2 4
+        // 0 => 0
+        // 1 => 1
+        // 2 => 1
+        // 3 => 0
+        // 4 => 1
+        // 5 => 0
+        // 6 => 0
+        // 7 => 1
+        // 8 => 3
+        // 9 => 2
+
+
+        public static int[] GetStatistics(byte[] byteArray)
+        {
+            int[] StatistikArray = new int[20];
+
+            for (int counter = 0; counter < byteArray.Length; counter++)
+            {
+                StatistikArray[byteArray[counter]]++;
+            }
+            return StatistikArray;
+        }
+
+        public static void TestGetStatistics()
+        {
+            byte[] ByteArray = new byte[100_000_000];
+            Random rndGen = new();
+            for (int counter = 0; counter < ByteArray.Length; counter++)
+            {
+                ByteArray[counter] = (byte)rndGen.Next(0, 20);
+            }
+
+            // array wird befüllt mit werten ab 0 und kleiner 20
+            int[] result = TestAufgaben.GetStatistics(ByteArray);
+
+            for (int counter = 0; counter < result.Length; counter++)
+            {
+                Console.WriteLine($" {counter} => {result[counter]}");
+            }
+        }
+
         public static void RaufzaehlenV2()
         {
             for (int counter = 3; counter < 22; counter += 3)
@@ -154,6 +196,20 @@ namespace Wiederholung
             Random rndGen = new();
             RandomNumber = rndGen.Next();
             return RandomNumber % 2 == 0;
+        }
+
+        public static void TestGetRandomAndEven()
+        {
+            int Zahl = 5;
+
+            Console.WriteLine("Wert von Zahl vor der Methode : " + Zahl);
+
+            bool isEven;
+
+            isEven = TestAufgaben.GetRandomAndEven(out Zahl);
+
+            Console.WriteLine("Zahl ist gerade? : " + isEven);
+            Console.WriteLine("Wert von Zahl nach der Methode: " + Zahl);
         }
     }
 }

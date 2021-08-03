@@ -8,7 +8,6 @@ namespace Wiederholung
 {
     class Methoden
     {
-
         /// <summary>
         /// Beispiel für eine einfache Methode
         /// </summary>
@@ -58,7 +57,7 @@ namespace Wiederholung
             Number++;
             Console.WriteLine("Number innerhalb der Methode: " + Number);
         }
-        
+
         // Die Methode erhält die Arbeitsspeicheradresse zu einem integer, veränderungen am original sind nicht erlaubt
         public static void ReadOriginal(in int Number)
         {
@@ -72,6 +71,58 @@ namespace Wiederholung
         {
             Number = 5;
             Console.WriteLine("Number: " + Number);
+        }
+
+
+        // AddNumbers(1,2,3,4);
+        // AddNumbers(1,4);
+
+
+        // AddNumbers(1,4,9,2,78,12,99,251949,1,6,436,416);
+        // AddNumbers("256", "1231", "879");
+
+
+        public static int AddNumbers(params int[] numbers)
+        {
+            int summe = 0;
+
+            for (int counter = 0; counter < numbers.Length; counter++)
+            {
+                summe = summe + numbers[counter];
+            }
+            return summe;
+        }
+
+
+        // Addnumbers("5") 5
+        // Addnumbers("3" , "2") 4
+        // Addnumbers("8" , "25", "1") 2
+        public static int AddNumbers(params string[] numbers)
+        {
+            int summe = 0;
+            for (int counter = 0; counter < numbers.Length; counter++)
+            {
+                if (int.TryParse(numbers[counter], out int zwischenergebnis))
+                {
+                    summe = summe + zwischenergebnis;
+                }
+            }
+            return summe;
+        }
+
+        // ConvertToInt("2");
+        // ConvertToInt("938");
+        // ConvertToInt("2140000000");
+        public static int ConvertToInt(string Text)
+        {
+            int gesamtergebnis = 0;
+            for (int counter = 0; counter < Text.Length; counter++)
+            {
+                char Zeichen = Text[counter];
+                int konvertiertesZeichen = Zeichen - 48;
+                gesamtergebnis = gesamtergebnis * 10 + konvertiertesZeichen;
+            }
+            return gesamtergebnis;
         }
     }
 }
