@@ -66,21 +66,12 @@ namespace Wiederholung
             Console.WriteLine("Number innerhalb der Methode: " + Number); // lesen ist weiter
         }
 
+
+        // Die Methode erhält die arbeitsspeicheradresse zu einem integer, dieser muss überschrieben werden.
         public static void WriteToOriginal(out int Number)
         {
             Number = 5;
             Console.WriteLine("Number: " + Number);
-
-
-            if (int.TryParse("12345", out int parsedNumber))
-            {
-                Console.WriteLine("Conversion successful :" + parsedNumber);
-            }
-            else
-            {
-                Console.WriteLine("Conversion failed");
-            }
-
         }
     }
 }
