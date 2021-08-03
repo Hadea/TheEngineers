@@ -147,5 +147,13 @@ namespace Wiederholung
 
             Console.WriteLine(ergebnis);
         }
+
+
+        public static bool GetRandomAndEven(out int RandomNumber)
+        {
+            Random rndGen = new();
+            RandomNumber = rndGen.Next();
+            return RandomNumber % 2 == 0;
+        }
     }
 }

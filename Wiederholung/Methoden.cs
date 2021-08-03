@@ -51,5 +51,36 @@ namespace Wiederholung
                 RecursiveMethod(); // selbstaufruf. Für den PC ist es ein ganz normaler aufruf einer Funktion
             }
         }
+
+        // Die Methode erhält die Arbeitsspeicheradresse zu einem integer, kann damit kann das original verändert werden
+        public static void IncrementByOne(ref int Number)
+        {
+            Number++;
+            Console.WriteLine("Number innerhalb der Methode: " + Number);
+        }
+        
+        // Die Methode erhält die Arbeitsspeicheradresse zu einem integer, veränderungen am original sind nicht erlaubt
+        public static void ReadOriginal(in int Number)
+        {
+            //Number++; //änderungen des originals sind nicht erlaubt
+            Console.WriteLine("Number innerhalb der Methode: " + Number); // lesen ist weiter
+        }
+
+        public static void WriteToOriginal(out int Number)
+        {
+            Number = 5;
+            Console.WriteLine("Number: " + Number);
+
+
+            if (int.TryParse("12345", out int parsedNumber))
+            {
+                Console.WriteLine("Conversion successful :" + parsedNumber);
+            }
+            else
+            {
+                Console.WriteLine("Conversion failed");
+            }
+
+        }
     }
 }
