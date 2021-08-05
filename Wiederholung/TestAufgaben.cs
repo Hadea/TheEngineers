@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Wiederholung
 {
-    class TestAufgaben
+    static class TestAufgaben
     {
         public static void RaufzaehlenV1()
         {
@@ -36,19 +32,6 @@ namespace Wiederholung
              */
 
         }
-
-        // 9 8 7 1 8 9 2 4 8 9 4 7 8 9 4 2 9 4 7 4 5 2 9 4 8 4 5 2 4
-        // 0 => 0
-        // 1 => 1
-        // 2 => 1
-        // 3 => 0
-        // 4 => 1
-        // 5 => 0
-        // 6 => 0
-        // 7 => 1
-        // 8 => 3
-        // 9 => 2
-
 
         public static int[] GetStatistics(byte[] byteArray)
         {
@@ -84,19 +67,6 @@ namespace Wiederholung
             for (int counter = 3; counter < 22; counter += 3)
                 Console.WriteLine("Zahl " + counter + " ist " + (counter % 2 == 0 ? "gerade" : "ungerade"));
         }
-
-
-        //Aufgabe: Fibonacci
-        // parameter   1 2 3 4 5 6  7  8  9 10 .. 
-        // return      1 1 2 3 5 8 13 21 34 55 ..
-
-        // Methode schreiben welche eine Zahl entgegennimmt und die fibonacci-zahl
-        // dazu ausrechnet und zurückgibt
-
-
-        // rekursiv:
-        // fibonacci anfrage kleiner als 3 ist immer 1
-        // fibonacci der zahl 5 ist die summe aus fibonacci 5-1 und fibonacci 5-2
 
         public static uint FibonacciRecursive(uint Number)
         {
@@ -142,14 +112,14 @@ namespace Wiederholung
             for (int counter = 0; counter < 20; counter++)
             {
                 //geht die oberste spalte des Array durch und füllt jedes fach mit einer zufälligen zahl
-                NumbersAndResults[0,counter] = (uint)rndGen.Next(1, 48); // kleinster möglicher wert 1, grösster 47
+                NumbersAndResults[0, counter] = (uint)rndGen.Next(1, 48); // kleinster möglicher wert 1, grösster 47
             }
 
             DateTime startRecursive = DateTime.Now; // systemzeit speichern kurz vor dem rekursiven durchlauf
 
             // fibonacci durchlauf mit rekursion
 
-            for (uint counter = 0; counter < 20; counter++) 
+            for (uint counter = 0; counter < 20; counter++)
             {
                 // liesst den wert aus reihe 0 und spalte "counter", lässt ihn mit Fibonacci umrechnen und
                 // speichert das Ergebnis in reihe 1 und spalte "counter"
@@ -190,7 +160,6 @@ namespace Wiederholung
             Console.WriteLine(ergebnis);
         }
 
-
         public static bool GetRandomAndEven(out int RandomNumber)
         {
             Random rndGen = new();
@@ -211,5 +180,81 @@ namespace Wiederholung
             Console.WriteLine("Zahl ist gerade? : " + isEven);
             Console.WriteLine("Wert von Zahl nach der Methode: " + Zahl);
         }
+
+
+        public static void FuellenUndTauschen()
+        {
+            /*
+             * Array erstellen der länge 20
+             * Zahlen ab 5 aufsteigend in das Array einfügen
+             * Zahl in Fach 0 mit der in Fach 1 tauschen
+             * Zahl in Fach 2 mit der in Fach 3 tauschen
+             * Zahl in Fach 4 mit der in Fach 5 tauschen
+             * ...
+             * Zahl in Fach 18 mit der in Fach 19 tauschen
+             * 
+             * 
+             *  5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ...
+             */
+            int[] UebungArray = new int[20];
+            for (int counter = 0; counter < UebungArray.Length; counter++)
+                UebungArray[counter] = counter + 5;
+
+            int backup;
+            for (int counter = 0; counter < UebungArray.Length; counter += 2)
+            {
+                backup = UebungArray[counter];
+                UebungArray[counter] = UebungArray[counter + 1];
+                UebungArray[counter + 1] = backup;
+            }
+        }
+
+        public static void SelectionSort()
+        {
+            // array erstellen
+            byte[] numberArray = new byte[100];
+            // zufallsgenerator erstellen
+            Random rndGen = new();
+            // array mit zufälligen werten füllen
+            // byte-arrays können mit einem einzigen befehl vollständig befüllt werden
+            // alle anderen benötigen eine schleife
+            rndGen.NextBytes(numberArray);
+
+            // array durchgehen bis zum vorletzen element
+            for (int outer = 0; outer < numberArray.Length - 1; outer++)
+            {
+                // array duchgehen ab nachfolgeelement bis zum letzten element
+                int lowest = outer;
+
+                for (int inner = outer + 1; inner < numberArray.Length; inner++)
+                {
+                    // wenn element an innerer position kleiner als das an äusserer position
+                    if (numberArray[outer] > numberArray[inner])
+                    {
+                        // elemente tauschen
+                        lowest = inner;
+                    }
+                }
+                if (lowest != outer)
+                {
+                    byte backup = numberArray[lowest];
+                    numberArray[lowest] = numberArray[outer];
+                    numberArray[outer] = backup;
+                }
+            }
+
+            Console.WriteLine("Sortiertes Array : ");
+            foreach (var item in numberArray)
+            {
+                Console.Write($" {item:D3}");
+            }
+        }
+
+        public static void EuroJackpot()
+        {
+            // 5 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 50
+            // 2 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 10
+        }
+
     }
 }
