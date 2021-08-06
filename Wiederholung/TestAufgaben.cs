@@ -277,5 +277,18 @@ namespace Wiederholung
             } while (possibleNumber == ZusatzZahlen[0]);
             ZusatzZahlen.Add(possibleNumber);
         }
+
+
+        /*
+         * Einen EuroJackpot Lottoschein mit zusatzzahlen erstellen
+         * 
+         * solange noch keine 5 sekunden vergangen sind
+         *      zufälligen lottoschein generieren
+         *      den lottoschein mit dem oben erstellten vergleichen
+         *      Anzahl der richtigen zahlen in eine Trefferstatistik schreiben
+         * ende solange
+         * 
+         * trefferstatistik ausgeben
+         */
     }
 }
