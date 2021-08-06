@@ -182,7 +182,6 @@ namespace Wiederholung
             Console.WriteLine("Wert von Zahl nach der Methode: " + Zahl);
         }
 
-
         public static void FuellenUndTauschen()
         {
             /*
@@ -253,12 +252,12 @@ namespace Wiederholung
 
         public static void EuroJackpot()
         {
-            List<byte> LottoZahlen = new ();
+            List<byte> LottoZahlen = new(5);
             Random rndGen = new();
             byte possibleNumber;
 
             // 5 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 50
-            while (LottoZahlen.Count < 5)
+            do
             {
                 possibleNumber = (byte)rndGen.Next(1, 51);
                 if (!LottoZahlen.Contains(possibleNumber))
@@ -266,15 +265,16 @@ namespace Wiederholung
                     LottoZahlen.Add(possibleNumber);
                 }
             }
+            while (LottoZahlen.Count < 5);
 
             // 2 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 10
-            List<byte> ZusatzZahlen = new();
+            List<byte> ZusatzZahlen = new(2);
             ZusatzZahlen.Add((byte)rndGen.Next(1, 11));
 
             do
             {
                 possibleNumber = (byte)rndGen.Next(1, 11);
-            } while (ZusatzZahlen.Contains(possibleNumber));
+            } while (possibleNumber == ZusatzZahlen[0]);
             ZusatzZahlen.Add(possibleNumber);
         }
     }
