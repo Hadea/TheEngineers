@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Wiederholung
 {
@@ -252,9 +253,29 @@ namespace Wiederholung
 
         public static void EuroJackpot()
         {
-            // 5 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 50
-            // 2 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 10
-        }
+            List<byte> LottoZahlen = new ();
+            Random rndGen = new();
+            byte possibleNumber;
 
+            // 5 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 50
+            while (LottoZahlen.Count < 5)
+            {
+                possibleNumber = (byte)rndGen.Next(1, 51);
+                if (!LottoZahlen.Contains(possibleNumber))
+                {
+                    LottoZahlen.Add(possibleNumber);
+                }
+            }
+
+            // 2 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 10
+            List<byte> ZusatzZahlen = new();
+            ZusatzZahlen.Add((byte)rndGen.Next(1, 11));
+
+            do
+            {
+                possibleNumber = (byte)rndGen.Next(1, 11);
+            } while (ZusatzZahlen.Contains(possibleNumber));
+            ZusatzZahlen.Add(possibleNumber);
+        }
     }
 }
