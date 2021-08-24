@@ -48,7 +48,12 @@ namespace ListTests
 
         public int Get(int Index)
         {
-            if (Index >= Count || Index < 0)
+            if (Index >= Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(Index), "Angeforderter Index war grösser als der Füllstand der Liste");
+            }
+
+            if (Index < 0)
             {
                 throw new ArgumentOutOfRangeException();
             }

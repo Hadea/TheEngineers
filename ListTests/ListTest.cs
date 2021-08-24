@@ -121,5 +121,26 @@ namespace ListTests
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => l.Get(1));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => l.Get(2));
         }
+
+        [TestMethod]
+        public void NewCapacityAfterResize()
+        {
+            List l = new List();
+            l.Capacity = 50;
+            Assert.AreEqual(50, l.Capacity);
+        }
+
+        [TestMethod]
+        public void NewCapacityLowerThanCount()
+        {
+            List l = new List();
+            l.Add(5);
+            l.Add(5);
+            l.Add(5);
+            l.Add(5);
+            l.Add(5);
+            l.Add(5);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => l.Capacity = 4);
+        }
     }
 }
