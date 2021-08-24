@@ -250,9 +250,11 @@ namespace Wiederholung
             }
         }
 
-        public static void EuroJackpot()
+        public static void EuroJackpot(List<byte> LottoZahlen, List<byte> ZusatzZahlen)
         {
-            List<byte> LottoZahlen = new(5);
+            LottoZahlen.Clear();
+            ZusatzZahlen.Clear();
+
             Random rndGen = new();
             byte possibleNumber;
 
@@ -268,7 +270,6 @@ namespace Wiederholung
             while (LottoZahlen.Count < 5);
 
             // 2 eindeutige Zahlen zufällig generieren, erste gültige ist die 1, letzte gültige ist 10
-            List<byte> ZusatzZahlen = new(2);
             ZusatzZahlen.Add((byte)rndGen.Next(1, 11));
 
             do
@@ -279,16 +280,63 @@ namespace Wiederholung
         }
 
 
-        /*
-         * Einen EuroJackpot Lottoschein mit zusatzzahlen erstellen
-         * 
-         * solange noch keine 5 sekunden vergangen sind
-         *      zufälligen lottoschein generieren
-         *      den lottoschein mit dem oben erstellten vergleichen
-         *      Anzahl der richtigen zahlen in eine Trefferstatistik schreiben
-         * ende solange
-         * 
-         * trefferstatistik ausgeben
-         */
+        public static void Stringausgabe()
+        {
+            string[] texts = new string[] { "Hallo ", "Welt!" };
+
+            Console.WriteLine($"Das erste Wort ist {texts[0]}");
+            Console.WriteLine("Das zweite Wort ist " + texts[1]);
+        }
+
+        public static void LottoFuerFuenfSekunden()
+        {
+            //Einen EuroJackpot Lottoschein mit zusatzzahlen erstellen
+            List<byte> spielerLottoschein = new();
+            List<byte> spielerZusatzzahlen = new();
+            List<byte> ziehungLottoschein = new();
+            List<byte> ziehungZusatzzahlen = new();
+            int[] statistik = new int[8];
+
+            EuroJackpot(spielerLottoschein, spielerZusatzzahlen);
+
+            DateTime startZeit = DateTime.Now;
+
+            while ((DateTime.Now - startZeit).TotalSeconds < 5d) //solange noch keine 5 sekunden vergangen sind
+            {
+
+                // zufälligen lottoschein generieren
+                EuroJackpot(ziehungLottoschein, ziehungZusatzzahlen);
+                int Treffer = 0;
+                // den lottoschein mit dem oben erstellten vergleichen
+                foreach (var item in ziehungLottoschein)
+                {
+                    if (spielerLottoschein.Contains(item))
+                    {
+                        Treffer++;
+                    }
+                }
+
+                foreach (var item in ziehungZusatzzahlen)
+                {
+                    if (spielerZusatzzahlen.Contains(item))
+                    {
+                        Treffer++;
+                    }
+                }
+
+                // Anzahl der richtigen zahlen in eine Trefferstatistik schreiben
+                statistik[Treffer]++;
+
+            }//ende solange
+
+            //trefferstatistik ausgeben
+            int sum = 0;
+            for (int id = 0; id < statistik.Length; id++)
+            {
+                Console.WriteLine($" {id} => {statistik[id]}");
+                sum += statistik[id];
+            }
+            Console.WriteLine($"Gesamtziehungen: {sum}");
+        }
     }
 }

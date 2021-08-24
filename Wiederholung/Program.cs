@@ -6,7 +6,8 @@ namespace Wiederholung
     {
         static void Main()
         {
-            
+            TestAufgaben.LottoFuerFuenfSekunden();
         }
     }
 }
+
