@@ -6,7 +6,7 @@ namespace Wiederholung
     {
         static void Main()
         {
-            TestAufgaben.LottoFuerFuenfSekunden();
+            Vererbung.DoSomething();
         }
     }
 }
