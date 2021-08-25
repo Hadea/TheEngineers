@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Wiederholung
 {
-    class InputConversion
+    static class InputConversion
     {
         public static void DoSomething()
         {
-            List<int> aLotOfNumbers = new List<int>();
-
-            string userInput = Console.ReadLine();
-
+            List<int> aLotOfNumbers = new();
+            string userInput;
             int convertedNumber;
 
             do
             {
                 Console.WriteLine("Bitte Zahl eingeben");
-            } while (int.TryParse(userInput, out convertedNumber));
+                userInput = Console.ReadLine(); // Text wird von der Konsole eingelesen bis Enter gedrückt wird. Alle Zeichen werden in einem String gesammelt und zurückgegeben.
+            } while (!int.TryParse(userInput, out convertedNumber)); // Konvertiert einen string in einen int. Wenn die Konvertierung klappt gibt die methode true zurück.
             Console.WriteLine("Zahl akzeptiert");
-            aLotOfNumbers.Add(convertedNumber);
+            aLotOfNumbers.Add(convertedNumber); // die Zahl wird in die Liste eingefügt.
         }
     }
 }
