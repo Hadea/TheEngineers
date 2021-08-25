@@ -139,8 +139,46 @@ namespace ListTests
             l.Add(5);
             l.Add(5);
             l.Add(5);
-            l.Add(5);
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => l.Capacity = 4);
+        }
+
+        [TestMethod]
+        public void ClearResetsCount()
+        {
+            List l = new List();
+            l.Add(5);
+            l.Add(5);
+            l.Add(5);
+            l.Add(5);
+            l.Clear();
+            Assert.AreEqual(0, l.Count);
+        }
+
+        [TestMethod]
+        public void FullTestWithAuto()
+        {
+            List<Auto> l = new List<Auto>();
+            Assert.AreEqual(0, l.Count);
+            Assert.AreEqual(8, l.Capacity);
+            Auto a = new Auto();
+            a.Name = "Erstes Auto";
+            l.Add(a);
+            Assert.AreEqual(1, l.Count);
+            Assert.AreEqual(8, l.Capacity);
+            l.Add(new Auto() {Name = "Zweites Auto" });
+            Assert.AreEqual(2, l.Count);
+            Auto autoFromList = l.Get(1);
+            Assert.IsNotNull(autoFromList);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => l.Get(4));
+            l.Capacity = 4;
+            Assert.AreEqual(4, l.Capacity);
+            Assert.AreSame(a, l.Get(0));
+            Assert.AreSame(a.Name, l.Get(0).Name);
+        }
+
+        class Auto
+        {
+            public string Name;
         }
     }
 }

@@ -2,13 +2,15 @@
 
 namespace ListTests
 {
-    internal class List : IContainer
+    public class List : List<int> {}
+
+    public class List<DataType>
     {
-        protected int[] data;
+        protected DataType[] data;
 
         public List()
         {
-            data = new int[8];
+            data = new DataType[8];
         }
 
 
@@ -17,48 +19,62 @@ namespace ListTests
             get => data.Length;
             set
             {
-                if (value <= 0)
+                if (value <= 0 || value < Count)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(value), "Neue Kapazität war ausserhalb des gültigen bereichs");
                 }
+
+                DataType[] resizedArray = new DataType[value];
+                for (int i = 0; i < pCount; i++)
+                {
+                    resizedArray[i] = data[i];
+                }
+                data = resizedArray;
+
             }
         }
 
         public int Count
         {
-            get => _count;
+            get => pCount;
         }
-        protected int _count;
+        protected int pCount;
 
-        public void Add(int Number)
+        public void Add(DataType Number)
         {
             if (Count == Capacity) // prüfen ob wir noch platz haben
             {
-                int[] resizedArray = new int[Capacity * 2];
-                for (int i = 0; i < data.Length; i++)
-                {
-                    resizedArray[i] = data[i];
-                }
-                data = resizedArray;
+                Capacity *= 2;
             }
 
             data[Count] = Number;
-            _count++;
+            pCount++;
         }
 
-        public int Get(int Index)
+        public DataType Get(int Index)
         {
             if (Index >= Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(Index), "Angeforderter Index war grösser als der Füllstand der Liste");
+                throw new ArgumentOutOfRangeException(nameof(Index), "Angeforderter Index war grösser als der Füllstand der List");
             }
 
             if (Index < 0)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(Index),"Angeforderter Index war zu klein");
             }
 
             return data[Index];
+        }
+
+        public void Clear()
+        {
+            /*
+            for (int index = 0; index < pCount; index++)
+            {
+                data[index] = 0;
+            }
+            */
+            pCount = 0;
         }
     }
 }
