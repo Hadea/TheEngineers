@@ -22,7 +22,7 @@ namespace ListTests
         public void IsEmptyAfterNew()
         {
             Queue testQueue = new();
-            Assert.IsTrue(testQueue.Size == 0);
+            Assert.IsTrue(testQueue.Count == 0);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace ListTests
             Queue testQueue = new();
             testQueue.Push(1);
             _ = testQueue.Pop();
-            Assert.IsTrue(testQueue.Size == 0);
+            Assert.IsTrue(testQueue.Count == 0);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace ListTests
         {
             Queue testQueue = new();
             testQueue.Push(1);
-            Assert.IsFalse(testQueue.Size == 0);
+            Assert.IsFalse(testQueue.Count == 0);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace ListTests
             testQueue.Push(1);
             testQueue.Push(1);
             testQueue.Pop();
-            Assert.IsFalse(testQueue.Size == 0);
+            Assert.IsFalse(testQueue.Count == 0);
         }
 
         /// <summary>
@@ -71,12 +71,12 @@ namespace ListTests
             testQueue.Push(1);
             testQueue.Push(1);
             testQueue.Pop();
-            Assert.IsFalse(testQueue.Size == 0);
+            Assert.IsFalse(testQueue.Count == 0);
             testQueue.Pop();
-            Assert.IsTrue(testQueue.Size == 0);
+            Assert.IsTrue(testQueue.Count == 0);
             testQueue.Push(1);
             testQueue.Push(1);
-            Assert.IsFalse(testQueue.Size == 0);
+            Assert.IsFalse(testQueue.Count == 0);
         }
 
         /// <summary>
@@ -372,7 +372,7 @@ namespace ListTests
             int Q = 0;
             testQueue.ForEach((i) => Q += i);
             Assert.IsTrue(Q == 10);
-            Assert.IsTrue(testQueue.Size == 0);
+            Assert.IsTrue(testQueue.Count == 0);
             Assert.IsTrue(testQueue.Capacity == 10);
             Assert.ThrowsException<IndexOutOfRangeException>(() => testQueue.Pop());
         }
