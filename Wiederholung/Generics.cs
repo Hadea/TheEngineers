@@ -1,9 +1,10 @@
 ﻿
 namespace Wiederholung
 {
-    class Generics<DataType> // erstellt eine Klasse welche für jeden Datentypen (nur die benutzten) eine Kopie für diesen datentypen erstellt
+    class Generics<DataType, SecondDataType> // erstellt eine Klasse welche für jeden Datentypen (nur die benutzten) eine Kopie für diesen datentypen erstellt
     {
         DataType data; // Der Platzhalter "DataType" wird beim kompilieren ersetzt durch den gewünschten datentypen
+        SecondDataType otherData;
     }
 
     class ClassWithGenericMethod
