@@ -73,6 +73,11 @@ namespace Wiederholung
             LinkedListOfInteger.RemoveFirst(); // löscht das erste element der LinkedList
             LinkedListOfInteger.RemoveLast(); // löscht das letzte element der LinkedList
 
+            foundNode.Value = 2; // ändert den Inhalt eines Elements
+            LinkedListNode<int> nodeAfter = foundNode.Next; // in Next und Previous sind die angrenzenden Nodes
+            // gespeichert. Sollte diese Referenz null sein is das ende der kette erreicht
+
+
             // zum iterieren über den gesamten Inhalt einer LinkedList sollte die ForEach-Schleife genutzt werden
             // durch den Iterator welcher immer die position des nächsten elements kennt muss für einen zugriff
             // nicht die kette jedes mal durchgegangen werden.
