@@ -338,5 +338,16 @@ namespace Wiederholung
             }
             Console.WriteLine($"Gesamtziehungen: {sum}");
         }
+
+        public static void LinkedListExercise()
+        {
+            /*
+             * LinkedList mit zahlen von 0 bis 19 füllen
+             * LinkedList durchgehen und jede ungerade Zahl entfernen
+             * Alle elemente der LinkedList auf die Console ausgeben
+             */
+        }
+
+
     }
 }
