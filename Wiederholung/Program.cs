@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Wiederholung
+﻿namespace Wiederholung
 {
-    class Program
+    internal static class Program
     {
         static void Main()
         {
-            Vererbung.DoSomething();
+            TestAufgaben.LinkedListExercise();
         }
     }
 }

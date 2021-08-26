@@ -346,6 +346,24 @@ namespace Wiederholung
              * LinkedList durchgehen und jede ungerade Zahl entfernen
              * Alle elemente der LinkedList auf die Console ausgeben
              */
+
+            LinkedList<int> zahlenListe = new(); // eine leere Zahlenliste wird erstellt
+            for (int counter = 0; counter < 20; counter++) // zahlen von 0 bis 19 erzeugen
+            {
+                zahlenListe.AddLast(counter); // erzeugte zahlen in Liste eintragen
+            }
+
+            for (int counter = 1; counter < 20; counter += 2) // ungerade zahlen beginnend mit 1 erzeugen, in 2er-schritten raufzählen
+            {
+                var NodeToDelete = zahlenListe.Find(counter); // findet die node welche wir nicht mehr haben wollen
+                zahlenListe.Remove(NodeToDelete); // löschen der node aus der liste
+            }
+
+            // gesamten inhalt ausgeben
+            foreach (var item in zahlenListe)
+            {
+                Console.Write($" {item:D2}");
+            }
         }
 
 
