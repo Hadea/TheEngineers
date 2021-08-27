@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace ListTests
@@ -34,7 +34,7 @@ namespace ListTests
             Queue testQueue = new();
             testQueue.Push(1);
             _ = testQueue.Pop();
-            Assert.IsTrue(testQueue.Count == 0);
+            Assert.AreEqual(0, testQueue.Count);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace ListTests
         {
             Queue testQueue = new();
             testQueue.Push(1);
-            Assert.IsFalse(testQueue.Count == 0);
+            Assert.AreNotEqual(0, testQueue.Count);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace ListTests
             testQueue.Push(1);
             testQueue.Push(1);
             testQueue.Pop();
-            Assert.IsFalse(testQueue.Count == 0);
+            Assert.AreNotEqual(0, testQueue.Count);
         }
 
         /// <summary>
@@ -71,12 +71,12 @@ namespace ListTests
             testQueue.Push(1);
             testQueue.Push(1);
             testQueue.Pop();
-            Assert.IsFalse(testQueue.Count == 0);
+            Assert.AreNotEqual(0, testQueue.Count);
             testQueue.Pop();
-            Assert.IsTrue(testQueue.Count == 0);
+            Assert.AreEqual(0, testQueue.Count);
             testQueue.Push(1);
             testQueue.Push(1);
-            Assert.IsFalse(testQueue.Count == 0);
+            Assert.AreNotEqual(0, testQueue.Count);
         }
 
         /// <summary>
@@ -86,10 +86,8 @@ namespace ListTests
         public void EqualAfterPushAndPop()
         {
             Queue testQueue = new();
-            int testValue = 20;
-            testQueue.Push(testValue);
-            int returnValue = testQueue.Pop();
-            Assert.IsTrue(testValue == returnValue);
+            testQueue.Push(20);
+            Assert.AreEqual(20, testQueue.Pop());
         }
 
         /// <summary>
@@ -108,9 +106,9 @@ namespace ListTests
             int returnValueA = testQueue.Pop();
             int returnValueB = testQueue.Pop();
             int returnValueC = testQueue.Pop();
-            Assert.IsTrue(testValueA == returnValueA);
-            Assert.IsTrue(testValueB == returnValueB);
-            Assert.IsTrue(testValueC == returnValueC);
+            Assert.AreEqual(testValueA, returnValueA);
+            Assert.AreEqual(testValueB, returnValueB);
+            Assert.AreEqual(testValueC, returnValueC);
         }
 
         /// <summary>
@@ -128,7 +126,7 @@ namespace ListTests
 
             for (int i = 10; i <= 90000; i++)
             {
-                Assert.IsTrue(testQueue.Pop() == i);
+                Assert.AreEqual(i, testQueue.Pop());
             }
         }
 
@@ -147,7 +145,7 @@ namespace ListTests
 
             for (int i = 10; i <= 90000; i++)
             {
-                Assert.IsTrue(testQueue.Pop() == i);
+                Assert.AreEqual(i, testQueue.Pop());
             }
         }
 
@@ -176,10 +174,10 @@ namespace ListTests
             for (int i = 0; i < 50; i++)
             {
                 testQueue.Push(i);
-                Assert.IsTrue(i == testQueue.Pop());
+                Assert.AreEqual(i, testQueue.Pop());
             }
 
-            Assert.IsTrue(testQueue.Capacity == 5);
+            Assert.AreEqual(5, testQueue.Capacity);
         }
 
         /// <summary>
@@ -193,17 +191,18 @@ namespace ListTests
             testQueue.Push(2);
             testQueue.Push(3);
             testQueue.Push(4);// Queue at max
-            Assert.IsTrue(testQueue.Capacity == 4);
-            Assert.IsTrue(testQueue.Pop() == 1);
-            Assert.IsTrue(testQueue.Pop() == 2);
+            Assert.AreEqual(4, testQueue.Capacity);
+            Assert.AreEqual(1, testQueue.Pop());
+            Assert.AreEqual(2, testQueue.Pop());
             testQueue.Push(5);
             testQueue.Push(6);
-            Assert.IsTrue(testQueue.Capacity == 4);
-            Assert.IsTrue(testQueue.Pop() == 3);
+            Assert.AreEqual(4, testQueue.Capacity);
+            Assert.AreEqual(3, testQueue.Pop());
             testQueue.Push(7);
             testQueue.Push(8);// needs resize
-            Assert.IsTrue(testQueue.Pop() == 4);
-            Assert.IsTrue(testQueue.Capacity == 8);
+            Assert.AreEqual(4, testQueue.Pop());
+            Assert.AreEqual(8, testQueue.Capacity);
+            Assert.AreEqual(4, testQueue.Count);
         }
 
         /// <summary>
@@ -234,12 +233,12 @@ namespace ListTests
             for (int counter = 0; counter < 20; counter++)
                 testQueue.Push(counter);
             for (int counter = 0; counter < 10; counter++)
-                Assert.IsTrue(testQueue.Pop() == counter);
+                Assert.AreEqual(counter, testQueue.Pop());
             for (int counter = 20; counter < 40; counter++)
                 testQueue.Push(counter);
             for (int counter = 10; counter < 30; counter++)
-                Assert.IsTrue(testQueue.Pop() == counter);
-            Assert.IsTrue(testQueue.Capacity <= 20);
+                Assert.AreEqual(counter, testQueue.Pop());
+            Assert.AreEqual(20, testQueue.Capacity);
         }
 
         /// <summary>
@@ -252,10 +251,10 @@ namespace ListTests
             for (int counter = 0; counter < 8; counter++)
                 testQueue.Push(counter);
             for (int counter = 0; counter < 4; counter++)
-                Assert.IsTrue(testQueue.Pop() == counter);
+                Assert.AreEqual(counter, testQueue.Pop());
             testQueue.Capacity = 5;
             for (int counter = 4; counter < 8; counter++)
-                Assert.IsTrue(testQueue.Pop() == counter);
+                Assert.AreEqual(counter, testQueue.Pop());
         }
 
         /// <summary>
@@ -268,12 +267,12 @@ namespace ListTests
             for (int counter = 0; counter < 10; counter++)
                 testQueue.Push(counter);
             for (int counter = 0; counter < 8; counter++)
-                Assert.IsTrue(testQueue.Pop() == counter);
+                Assert.AreEqual(counter, testQueue.Pop());
             for (int counter = 10; counter < 12; counter++)
                 testQueue.Push(counter);
             testQueue.Capacity = 5;
             for (int counter = 8; counter < 12; counter++)
-                Assert.IsTrue(testQueue.Pop() == counter);
+                Assert.AreEqual(counter, testQueue.Pop());
         }
 
         /// <summary>
@@ -309,7 +308,7 @@ namespace ListTests
                 testQueue.Push(counter);
             for (int counter = 0; counter < 29; counter++)
                 testQueue.Pop();
-            Assert.IsTrue(testQueue.Capacity == 10);
+            Assert.AreEqual(10, testQueue.Capacity);
         }
 
         /// <summary>
@@ -328,7 +327,7 @@ namespace ListTests
                 testQueue.Push(counter);
             for (int counter = 0; counter < 29; counter++)
                 testQueue.Pop();
-            Assert.IsTrue(testQueue.Capacity == 5);
+            Assert.AreEqual(5, testQueue.Capacity);
         }
 
         /// <summary>
@@ -339,7 +338,7 @@ namespace ListTests
         {
             Queue testQueue = new(15);
             testQueue.Capacity = 7;
-            Assert.IsTrue(testQueue.Capacity == 7);
+            Assert.AreEqual(7, testQueue.Capacity);
         }
 
         /// <summary>
@@ -355,7 +354,7 @@ namespace ListTests
             testQueue.Push(4);
             int Q = 0;
             testQueue.ForEach((i) => Q += i);
-            Assert.IsTrue(Q == 10);
+            Assert.AreEqual(10, Q);
         }
 
         /// <summary>
@@ -371,9 +370,9 @@ namespace ListTests
             testQueue.Push(4);
             int Q = 0;
             testQueue.ForEach((i) => Q += i);
-            Assert.IsTrue(Q == 10);
-            Assert.IsTrue(testQueue.Count == 0);
-            Assert.IsTrue(testQueue.Capacity == 10);
+            Assert.AreEqual(10, Q);
+            Assert.AreEqual(0, testQueue.Count);
+            Assert.AreEqual(10, testQueue.Capacity);
             Assert.ThrowsException<IndexOutOfRangeException>(() => testQueue.Pop());
         }
     }
