@@ -235,6 +235,17 @@ namespace TicTacToeTests
             Assert.AreEqual(TurnResult.Invalid, l.Turn(2, 2)); // turn after win is always invalid
         }
 
+        [TestMethod]
+        public void NoPlayerChangeAfterInValidTurnAddition()
+        {
+            Logic l = new();
+            bool player = l.GetCurrentPlayer();
+            Assert.AreEqual(TurnResult.Invalid, l.Turn(0, -1)); // ausserhalb des spielfeldes
+            Assert.AreEqual(TurnResult.Invalid, l.Turn(3, 2)); // ausserhalb des spielfeldes
+            Assert.AreEqual(TurnResult.Invalid, l.Turn(-2, -3)); // ausserhalb des spielfeldes
+            Assert.AreEqual(player, l.GetCurrentPlayer());
+        }
+
         private static bool checkIfEmpty(Field[,] GameBoard)
         {
             for (int Y = 0; Y < 3; Y++)
