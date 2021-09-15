@@ -35,6 +35,14 @@ namespace Wiederholung
         // Bit
         bool EinzelnesBit = true; // kann true oder false sein
 
+
+        /// /////////////////////////////////
+
+        int dezimalbefuellt = 100;
+        int hexadezimalbefuellt = 0x0100; // entspricht 256 in dezimal
+        int binaerbefuellt = 0b0100; // entspricht 4 in dezimal
+        int befuelltMitTrennstrich = 100_000_000; //unterstrich erhöht die lesbarkeit, innerhalb einer zahl wird er ignoriert
+
         public static void StringExample()
         {
             string systemInformation;
