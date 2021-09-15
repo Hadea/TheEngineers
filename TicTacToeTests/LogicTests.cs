@@ -18,20 +18,20 @@ namespace TicTacToeTests
         public void PlayerChangeAfterValidTurn()
         {
             Logic l = new();
-            bool player = l.GetCurrentPlayer();
+            bool player = l.CurrentPlayer;
             Assert.AreEqual(TurnResult.Valid, l.Turn(0, 0));
-            Assert.AreNotEqual(player, l.GetCurrentPlayer());
+            Assert.AreNotEqual(player, l.CurrentPlayer);
         }
 
         [TestMethod]
         public void NoPlayerChangeAfterInValidTurn()
         {
             Logic l = new();
-            bool player = l.GetCurrentPlayer();
+            bool player = l.CurrentPlayer;
             Assert.AreEqual(TurnResult.Invalid, l.Turn(0, 3)); // ausserhalb des spielfeldes
             Assert.AreEqual(TurnResult.Invalid, l.Turn(-1, 2)); // ausserhalb des spielfeldes
             Assert.AreEqual(TurnResult.Invalid, l.Turn(3, 3)); // ausserhalb des spielfeldes
-            Assert.AreEqual(player, l.GetCurrentPlayer());
+            Assert.AreEqual(player, l.CurrentPlayer);
         }
 
         [TestMethod]
@@ -239,11 +239,11 @@ namespace TicTacToeTests
         public void NoPlayerChangeAfterInValidTurnAddition()
         {
             Logic l = new();
-            bool player = l.GetCurrentPlayer();
+            bool player = l.CurrentPlayer;
             Assert.AreEqual(TurnResult.Invalid, l.Turn(0, -1)); // ausserhalb des spielfeldes
             Assert.AreEqual(TurnResult.Invalid, l.Turn(3, 2)); // ausserhalb des spielfeldes
             Assert.AreEqual(TurnResult.Invalid, l.Turn(-2, -3)); // ausserhalb des spielfeldes
-            Assert.AreEqual(player, l.GetCurrentPlayer());
+            Assert.AreEqual(player, l.CurrentPlayer);
         }
 
         private static bool checkIfEmpty(Field[,] GameBoard)
