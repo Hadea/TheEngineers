@@ -2,11 +2,19 @@
 
 namespace TicTacToeConsoleUI
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            SceneManager.Add(new MainMenuScene());
+            Console.CursorVisible = false;
+
+            while (SceneManager.SceneCount > 0)
+            {
+                SceneManager.Draw();
+                SceneManager.Update();
+            }
+            Console.ResetColor();
         }
     }
 }

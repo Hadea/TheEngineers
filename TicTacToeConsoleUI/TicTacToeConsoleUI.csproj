@@ -9,4 +9,10 @@
     <ProjectReference Include="..\TicTacToeLogic\TicTacToeLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Logo.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
