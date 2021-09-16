@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            Dateien.DoSomething();
+            UsingDemo.DoSomething();
         }
     }
 }
