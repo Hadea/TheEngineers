@@ -25,6 +25,8 @@ namespace Wiederholung
                     Console.WriteLine(dataOfTextFileInLines[i]);
                 }
             }
+            // Erstellt oder überschreibt eine datei. Der neue inhalt ist Hallo Welt!
+            File.WriteAllText("HalloWelt.txt", "Hallo Welt!");
 
             if (File.Exists("Checker.bmp"))
             {
@@ -38,9 +40,8 @@ namespace Wiederholung
             }
 
             /// ab hier geht es um Streams
-            /// 
 
-            using (FileStream stream = File.Open("HalloWelt.txt", FileMode.OpenOrCreate))
+            using (FileStream stream = File.Open("HalloWelt.txt", FileMode.Open))
             {
                 int[] fileData = new int[3];
 
@@ -66,12 +67,32 @@ namespace Wiederholung
             using (FileStream stream = File.OpenRead("HalloWelt.txt"))
             {
                 byte[] data = new byte[70]; // Ein Puffer welcher die Daten aufnehmen soll
-                int byteCount = stream.Read(data);// liesst die daten in das array. Rückgabe ist die anzahl der gelesenen bytes
+                int byteCount = stream.Read(data);// liesst die daten vom stream in das array. Rückgabe ist die anzahl der gelesenen bytes
                 Console.WriteLine($"Anzahl der gelesenen bytes : {byteCount}");
+
+                for (int count = 0; count < byteCount; count++)
+                {
+                    Console.WriteLine(data[count].ToString("X"));
+                }
             }
 
 
-            //File.WriteAllText("HalloWelt.txt", "Blub");
+            // StreamReader und StreamWriter werden benutzt um über einen Stream eine Textdatei zu bearbeiten. Ungeeignet für Binärdateien
+
+            using (StreamReader stream = new("HalloWelt.txt"))
+            {
+                stream.Read(); // liesst ein einzelnes zeichen aus dem stream
+                char[] buffer = new char[5];
+                int charCount = stream.ReadBlock(buffer); // liesst daten in ein Array
+                string zeile = stream.ReadLine(); // liesst bis zum nächsten Zeilenumbruch in einen string
+                string rest = stream.ReadToEnd(); // liesst den gesamten restlichen inhalt in einen string
+            }
+
+            using (StreamWriter stream = new("HalloWelt.txt")) // öffnet eine textdatei mit schreibrechten. es können auch optionen angegeben werden wie anhängen oder das Encoding
+            {
+                stream.WriteLine(@"Hallo Welt!"); // schreibt die Zeile in die datei und macht danach einen Zeilenumbruch
+                stream.Write(127); // konvertiert den parameter in einen string und schreibt diesen in die datei
+            }
         }
     }
 }
